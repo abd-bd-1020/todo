@@ -30,7 +30,7 @@ public class TodoRepository {
 
     @Transactional
     public void updateTodo(Todo todo) {
-        entityManager.merge(todo);
+      entityManager.createQuery("UPDATE Todo t SET t.title = :title, t.description = :description, t.isDone = :isDone, t.isStarred = :isStarred WHERE t.id = :id");
     }
 
     @Transactional

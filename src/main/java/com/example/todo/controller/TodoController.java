@@ -21,16 +21,16 @@ public class TodoController {
         return "hello";
     }
 
-//    @GetMapping
-//    public ArrayList<Todo> getAllTodos() {
-//        return todoService.getAllTodos();
-//    }
+    @GetMapping("/test")
+    public ArrayList<Todo> getAllTodos() {
+        return todoService.getAllTodos();
+    }
     @GetMapping
     public ModelAndView getAllTodos(Model model) {
         ArrayList<Todo> todos = todoService.getAllTodos();
         model.addAttribute("todos", todos);
         ModelAndView modelAndView = new ModelAndView ( );
-        modelAndView.setViewName ( "todo-list.html" );
+        modelAndView.setViewName ( "index.html" );
         return modelAndView;
     }
 
