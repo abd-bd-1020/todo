@@ -4,6 +4,8 @@ import com.example.todo.entity.Todo;
 import com.example.todo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 
@@ -16,12 +18,20 @@ public class TodoController {
 
     @RequestMapping("/hello")
     public String hello() {
-        return "Hello World";
+        return "hello";
     }
 
+//    @GetMapping
+//    public ArrayList<Todo> getAllTodos() {
+//        return todoService.getAllTodos();
+//    }
     @GetMapping
-    public ArrayList<Todo> getAllTodos() {
-        return todoService.getAllTodos();
+    public ModelAndView getAllTodos(Model model) {
+        ArrayList<Todo> todos = todoService.getAllTodos();
+        model.addAttribute("todos", todos);
+        ModelAndView modelAndView = new ModelAndView ( );
+        modelAndView.setViewName ( "todo-list.html" );
+        return modelAndView;
     }
 
     @GetMapping("/{id}")
@@ -31,6 +41,7 @@ public class TodoController {
 
     @PostMapping
     public void createTodo(@RequestBody Todo todo) {
+        System.out.println("todo");
         todoService.createTodo(todo);
     }
 

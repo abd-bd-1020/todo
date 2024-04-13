@@ -13,7 +13,7 @@ public class Todo {
     private String id;
     private String title;
     private String description;
-    private boolean done;
+    private boolean isDone;
     private boolean isStarred;
 
 
@@ -30,7 +30,7 @@ public class Todo {
     }
 
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     public boolean isStarred() {
@@ -48,8 +48,8 @@ public class Todo {
     public void setDescription(String description) {
         this.description = description;
     }
-    public void setDone(boolean done) {
-        this.done = done;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public void setStarred(boolean starred) {
