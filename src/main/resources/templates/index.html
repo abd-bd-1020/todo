@@ -18,13 +18,11 @@
         <th>Is Done</th>
         <th>Is Starred</th>
         <th>Actions</th>
-
     </tr>
     </thead>
     <tbody>
     <tr th:each="todo : ${todos}"
         th:attr="data-id=${todo.id}"
-
     >
         <td th:text="${todo.title}"></td>
         <td th:text="${todo.description}"></td>
@@ -39,7 +37,6 @@
 </table>
 <div class="create-link">
     <button id="createTodoLink">Create New Todo</button>
-
 </div>
 <div class="modal" id="myModal">
     <div class="modal-content">
@@ -58,38 +55,36 @@
         </form>
     </div>
 </div>
-
 <script th:inline="javascript">
     document.addEventListener("DOMContentLoaded", function() {
         var modal = document.getElementById('myModal');
         var closeBtn = document.getElementsByClassName("close")[0];
         var createTodoLink = document.getElementById('createTodoLink');
 
-        // Function to open the modal
         function showModal() {
             modal.style.display = "block";
         }
 
-        // Function to close the modal
         function closeModal() {
                 var todoForm = document.getElementById('createTodoForm');
                 todoForm.reset();
             modal.style.display = "none";
         }
 
-        // Close the modal when clicking on the close button
         closeBtn.onclick = function() {
             closeModal();
+            window.location.reload();
+
         };
 
-        // Close the modal when clicking anywhere outside of it
         window.onclick = function(event) {
             if (event.target == modal) {
                 closeModal();
+                window.location.reload();
+
             }
         };
 
-        // Open the modal when clicking on the "Create New Todo" link
         createTodoLink.onclick = function(event) {
             event.preventDefault(); // Prevent the default link behavior
             showModal();
@@ -131,13 +126,13 @@
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
-                    console.log('Todo updated successfully');
                     closeModal();
+                    window.location.reload();
                 }).catch(function(error) {
-                    console.error('Error:', error);
                 });
             }
-        fetch('/v1/todos/create', { // Update the endpoint to /v1/todos/create
+            else{
+              fetch('/v1/todos/create', { // Update the endpoint to /v1/todos/create
             method: 'POST',
             body: JSON.stringify(formData),
               headers: {
@@ -148,12 +143,15 @@
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            console.log('Todo created successfully');
-            closeModal(); // Close modal after successful submission
+            closeModal();
+            window.location.reload();
+
         })
         .catch(function(error) {
             console.error('Error:', error);
         });
+            }
+
     });
     function closeModal() {
 
@@ -164,12 +162,12 @@
         var modal = document.getElementById('myModal');
         modal.style.display = "block";
     }
-});
+    });
 </script>
 <script>
     var deleteButton = document.getElementById('deleteButton');
 
-deleteButton.addEventListener('click', function(event) {
+    deleteButton.addEventListener('click', function(event) {
     event.preventDefault();
     var row = event.target.parentNode.parentNode;
     var id = row.getAttribute('data-id');
@@ -188,13 +186,13 @@ deleteButton.addEventListener('click', function(event) {
     .catch(function(error) {
         console.error('Error:', error);
     });
-});
+    });
 
 </script>
 <script>
     var updateButtons = document.querySelectorAll('#updateButton');
 
-updateButtons.forEach(function(button) {
+    updateButtons.forEach(function(button) {
     button.addEventListener('click', function(event) {
         event.preventDefault();
         var row = event.target.parentNode.parentNode;
@@ -219,7 +217,7 @@ updateButtons.forEach(function(button) {
 
 
     });
-});
+    });
 
         function closeModal() {
 
@@ -234,6 +232,5 @@ updateButtons.forEach(function(button) {
 
 
 </script>
-
 </body>
 </html>
