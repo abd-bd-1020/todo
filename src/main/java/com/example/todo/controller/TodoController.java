@@ -39,8 +39,9 @@ public class TodoController {
         return todoService.getTodoById(id);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public void createTodo(@RequestBody Todo todo) {
+
         System.out.println("todo");
         todoService.createTodo(todo);
     }

@@ -107,9 +107,9 @@
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Create New Todo</h2>
-        <form th:action="@{/v1/todos/create}" method="post">
+        <form id="createTodoForm">
             <label for="title">Title:</label><br>
-            <input type="text" id="title" name="title"><br>
+            <input  type="text" id="title" name="title"><br>
             <label for="description">Description:</label><br>
             <textarea id="description" name="description"></textarea><br>
             <label for="isDone">Is Done:</label>
@@ -159,29 +159,37 @@
 <script th:inline="javascript">
     /* JavaScript to submit form via AJAX */
     document.addEventListener("DOMContentLoaded", function() {
-        var createTodoForm = document.getElementById('createTodoForm');
+    var createTodoForm = document.getElementById('createTodoForm');
 
-        createTodoForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
+    createTodoForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
 
-            var formData = new FormData(createTodoForm); // Get form data
-
-            fetch('/v1/todos', {
-                method: 'POST',
-                body: formData
-            })
-            .then(function(response) {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                console.log('Todo created successfully');
-                closeModal(); // Close modal after successful submission
-            })
-            .catch(function(error) {
-                console.error('Error:', error);
-            });
+              var formData = {
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                isDone: document.getElementById('isDone').checked,
+                isStarred: document.getElementById('isStarred').checked
+            };
+        console.log(formData);
+        fetch('/v1/todos/create', { // Update the endpoint to /v1/todos/create
+            method: 'POST',
+            body: JSON.stringify(formData),
+              headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log('Todo created successfully');
+            closeModal(); // Close modal after successful submission
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
         });
     });
+});
 </script>
 </body>
 </html>
