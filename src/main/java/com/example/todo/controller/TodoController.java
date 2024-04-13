@@ -1,6 +1,5 @@
 package com.example.todo.controller;
 
-
 import com.example.todo.entity.Todo;
 import com.example.todo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
+@RequestMapping("/v1/todos")
 public class TodoController {
 
     @Autowired
@@ -19,34 +19,28 @@ public class TodoController {
         return "Hello World";
     }
 
-    @GetMapping("/todos")
+    @GetMapping
     public ArrayList<Todo> getAllTodos() {
         return todoService.getAllTodos();
     }
 
-    @GetMapping("/todos/{id}")
-    public Todo getTodoById(String id) {
+    @GetMapping("/{id}")
+    public Todo getTodoById(@PathVariable String id) {
         return todoService.getTodoById(id);
     }
 
-    @PostMapping("/todos/todo")
-    public void createTodo(Todo todo) {
+    @PostMapping
+    public void createTodo(@RequestBody Todo todo) {
         todoService.createTodo(todo);
     }
 
-    @PutMapping("/todos/todo")
-    public void updateTodo(Todo todo) {
+    @PutMapping("/{id}")
+    public void updateTodo(@RequestBody Todo todo) {
         todoService.updateTodo(todo);
     }
 
-    @DeleteMapping("/todos/{id}")
-    public void deleteTodoById(String id) {
+    @DeleteMapping("/{id}")
+    public void deleteTodoById(@PathVariable String id) {
         todoService.deleteTodoById(id);
     }
-
-
-
-
-
-
 }
