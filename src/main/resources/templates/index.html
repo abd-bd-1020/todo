@@ -115,7 +115,7 @@
                 var id = document.querySelector('tr[data-id]').getAttribute('data-id');
                 formData.id = id;
 
-                fetch('/v1/todos/' + id, {
+                fetch('/v1/todos/'+ id, {
                     method: 'PUT',
                     body: JSON.stringify(formData),
                     headers: {
@@ -132,7 +132,7 @@
                 });
             }
             else{
-              fetch('/v1/todos/create', { // Update the endpoint to /v1/todos/create
+              fetch('/v1/todos', {
             method: 'POST',
             body: JSON.stringify(formData),
               headers: {
@@ -171,7 +171,6 @@
     event.preventDefault();
     var row = event.target.parentNode.parentNode;
     var id = row.getAttribute('data-id');
-    console.log('Delete button clicked for row with id: ' + id);
 
     fetch('/v1/todos/' + id, {
         method: 'DELETE'
@@ -180,8 +179,9 @@
         if (!response.ok) {
             throw new Error('HTTP error, status = ' + response.status);
         }
-        console.log('Todo with id ' + id + ' deleted successfully');
-        row.parentNode.removeChild(row); // Remove the row from the table
+        row.parentNode.removeChild(row);
+        window.location.reload();
+
     })
     .catch(function(error) {
         console.error('Error:', error);

@@ -16,10 +16,6 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
-    @RequestMapping("/hello")
-    public String hello() {
-        return "hello";
-    }
 
     @GetMapping("/test")
     public ArrayList<Todo> getAllTodos() {
@@ -39,10 +35,8 @@ public class TodoController {
         return todoService.getTodoById(id);
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public void createTodo(@RequestBody Todo todo) {
-
-        System.out.println("todo");
         todoService.createTodo(todo);
     }
 
