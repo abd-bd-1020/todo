@@ -134,7 +134,7 @@
     button.addEventListener('click', function(event) {
         event.preventDefault();
         var row = event.target.parentNode.parentNode;
-        var title = row.querySelector('td:nth-child(1)').textContent;
+        var title = row.querySelector('td:nth-child(1)').textContent.replace(/\u2605|\u2606/g, '').trim();
         var description = row.querySelector('td:nth-child(2)').textContent;
         var isDone = row.querySelector('td:nth-child(3)').textContent.trim() === 'Yes';
         var isStarred = row.querySelector('td:nth-child(4)').textContent.trim() === 'Yes';
