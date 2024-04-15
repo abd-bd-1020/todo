@@ -1,3 +1,15 @@
 databaseChangeLog:
   - include:
       file: classpath:/db/changelog/changes/001-initial-schema.sql
+
+  - changeSet:
+      id: 2
+      author: yourname
+      changes:
+        - sql: CREATE TABLE IF NOT EXISTS todo (
+            id  INT PRIMARY KEY,
+            is_starred BOOLEAN,
+            is_done BOOLEAN,
+            description TEXT,
+            title TEXT
+            );
