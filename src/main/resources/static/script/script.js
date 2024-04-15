@@ -65,7 +65,7 @@
                         throw new Error('Network response was not ok');
                     }
                     closeModal();
-//                    window.location.reload();
+                    window.location.reload();
                 }).catch(function(error) {
                 });
             }
@@ -139,7 +139,6 @@
         var isDone = row.querySelector('td:nth-child(3)').textContent.trim() === 'Yes';
         var isStarred = row.querySelector('td:nth-child(4)').textContent.trim() === 'Yes';
 
-        console.log('Update button clicked for row with title: ' + title);
         document.getElementById('title').value = title;
         document.getElementById('description').value = description;
         document.getElementById('isDone').checked = isDone;
