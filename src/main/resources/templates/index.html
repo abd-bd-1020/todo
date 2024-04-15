@@ -31,8 +31,8 @@
         <td th:text="${todo.description}"></td>
         <td th:text="${todo.done} ? 'Yes' : 'No'"></td>
         <td>
-            <button id="deleteButton">Delete</button>
-            <button id="updateButton">Update</button>
+            <button id="deleteButton" class = "deleteButton">Delete</button>
+            <button id="updateButton" class = "updateButton">Update</button>
         </td>
     </tr>
     </tbody>
@@ -46,7 +46,7 @@
         <h2 id="formTitle">Create New Todo</h2>
         <form id="createTodoForm">
             <label for="title">Title:</label><br>
-            <input type="text" id="title" name="title"><br>
+            <input type="text" id="title" name="title" required><br>
             <label for="description">Description:</label><br>
             <textarea id="description" name="description"></textarea><br>
             <label for="isDone">Is Done:</label>
