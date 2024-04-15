@@ -13,3 +13,14 @@ databaseChangeLog:
             description TEXT,
             title TEXT
             );
+  - changeSet:
+      id: 2
+      author: abdbd
+      changes:
+        - sql: CREATE TABLE IF NOT EXISTS todo (
+            id  INT PRIMARY KEY,
+            is_starred BOOLEAN,
+            is_done BOOLEAN,
+            description TEXT,
+            title TEXT
+            );
