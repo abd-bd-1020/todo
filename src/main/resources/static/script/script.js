@@ -108,6 +108,7 @@
     event.preventDefault();
     var row = event.target.parentNode.parentNode;
     var id = row.getAttribute('data-id');
+    console.log(id)
 
     fetch('/v1/todos/' + id, {
         method: 'DELETE'
@@ -116,10 +117,7 @@
         if (!response.ok) {
             throw new Error('HTTP error, status = ' + response.status);
         }
-        row.parentNode.removeChild(row);
-        if(row){
-            row.remove();
-        }
+        window.location.reload();
 
     })
     .catch(function(error) {
